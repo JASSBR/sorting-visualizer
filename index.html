@@ -10,12 +10,115 @@
   <div id="app">
     <header>
       <h1>Sorting Algorithm Visualizer</h1>
-      <p>Visualize sorting algorithms (bubble, merge, quick, heap) with speed control and comparisons.</p>
+      <p>Visualize sorting algorithms with speed control and comparisons</p>
     </header>
+
     <main>
-      <!-- Your app content here -->
+      <section class="controls" aria-label="Sorting controls">
+        <div class="controls-row">
+          <div class="control-group">
+            <label for="algorithm">Algorithm</label>
+            <select id="algorithm">
+              <option value="bubble">Bubble Sort</option>
+              <option value="selection">Selection Sort</option>
+              <option value="insertion">Insertion Sort</option>
+              <option value="merge">Merge Sort</option>
+              <option value="quick">Quick Sort</option>
+              <option value="heap">Heap Sort</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="arraySize">Array Size: <span id="sizeValue">50</span></label>
+            <input type="range" id="arraySize" min="5" max="200" value="50">
+          </div>
+
+          <div class="control-group">
+            <label for="speed">Speed: <span id="speedValue">50</span></label>
+            <input type="range" id="speed" min="1" max="100" value="50">
+          </div>
+        </div>
+
+        <div class="controls-row controls-actions">
+          <button id="generateBtn" class="btn btn-secondary" title="Generate new array (N)">
+            <span class="btn-icon">&#8635;</span> New Array
+          </button>
+          <button id="sortBtn" class="btn btn-primary" title="Start sorting (Space)">
+            <span class="btn-icon">&#9654;</span> Sort
+          </button>
+          <button id="pauseBtn" class="btn btn-warning" disabled title="Pause/Resume (P)">
+            <span class="btn-icon">&#10074;&#10074;</span> Pause
+          </button>
+          <button id="resetBtn" class="btn btn-danger" disabled title="Reset (R)">
+            <span class="btn-icon">&#9632;</span> Reset
+          </button>
+        </div>
+      </section>
+
+      <section class="stats-bar" aria-label="Sorting statistics">
+        <div class="stat">
+          <span class="stat-label">Comparisons</span>
+          <span class="stat-value" id="comparisons">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Swaps</span>
+          <span class="stat-value" id="swaps">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Time</span>
+          <span class="stat-value" id="elapsed">0.00s</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Status</span>
+          <span class="stat-value" id="status">Ready</span>
+        </div>
+      </section>
+
+      <section class="visualizer-container" aria-label="Array visualization">
+        <div class="visualizer" id="visualizer"></div>
+      </section>
+
+      <section class="legend" aria-label="Color legend">
+        <div class="legend-item">
+          <span class="legend-color" style="background: var(--bar-default)"></span>
+          <span>Unsorted</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: var(--bar-comparing)"></span>
+          <span>Comparing</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: var(--bar-swapping)"></span>
+          <span>Swapping</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: var(--bar-pivot)"></span>
+          <span>Pivot</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: var(--bar-sorted)"></span>
+          <span>Sorted</span>
+        </div>
+      </section>
+
+      <section class="algo-info" id="algoInfo" aria-label="Algorithm information">
+        <h3 id="algoName">Bubble Sort</h3>
+        <div class="algo-details">
+          <div class="algo-complexity">
+            <span>Time: <strong id="algoTime">O(n²)</strong></span>
+            <span>Space: <strong id="algoSpace">O(1)</strong></span>
+            <span>Stable: <strong id="algoStable">Yes</strong></span>
+          </div>
+          <p id="algoDesc">Repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.</p>
+        </div>
+      </section>
     </main>
+
+    <footer>
+      <p>Press <kbd>Space</kbd> to sort, <kbd>N</kbd> for new array, <kbd>P</kbd> to pause, <kbd>R</kbd> to reset</p>
+    </footer>
   </div>
+
   <script src="src/app.js"></script>
 </body>
 </html>
